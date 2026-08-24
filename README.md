@@ -127,6 +127,7 @@ See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) for third-party notices, 
 - [`docs/05-research-landscape.md`](docs/05-research-landscape.md)
 - [`docs/06-technical-environment.md`](docs/06-technical-environment.md)
 - [`docs/07-roadmap.md`](docs/07-roadmap.md)
+- [`docs/08-design-decisions.md`](docs/08-design-decisions.md)
 - [`docs/decision-log.md`](docs/decision-log.md)
 - [`docs/release-model.md`](docs/release-model.md)
 
