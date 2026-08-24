@@ -1,0 +1,40 @@
+{
+  "artifacts": [
+    {
+      "bytes": 8384,
+      "media_type": "application/yaml",
+      "path": "scenario.yaml",
+      "role": "canonical_scenario",
+      "sha256": "9c544913ab3bfcc18710c7ce1fe83e4235bb2ac20b7abea3a0f27753075ce779"
+    },
+    {
+      "bytes": 5936,
+      "media_type": "text/markdown",
+      "path": "scenario.md",
+      "role": "human_review_view",
+      "sha256": "c531d2d2125ffbe3e17c0d4e162153bffd66341b10ca6247f243f1f27d400ed2"
+    }
+  ],
+  "generated_at": "2026-08-19T00:00:00+00:00",
+  "generator": "scenario_compiler",
+  "generator_version": "0.1.0",
+  "hash_algorithm": "sha256",
+  "package_id": "RS-IAM-001",
+  "package_status": "approved",
+  "package_version": "1.0.0",
+  "schema_version": "0.1.0",
+  "signature_status": "unsigned",
+  "source_snapshots": [
+    {
+      "bundle_bytes": 53277393,
+      "local_reference": "data/source-snapshots/mitre-attack/enterprise/19.1/T1078-T1110.json",
+      "local_reference_sha256": "7ce3e038b061ca61f991c8ed3cb88e34f585750e8b03b4ef1fca7988e799630b",
+      "retrieved_on": "2026-08-19",
+      "sha256": "bdf1ce86a4e604214c5076d37ae4dcb322678afc528df8492e6fdc1b554f5da3",
+      "source": "MITRE ATT&CK Enterprise STIX 2.1",
+      "source_uri": "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/v19.1/enterprise-attack/enterprise-attack-19.1.json",
+      "version": "19.1"
+    }
+  ],
+  "verification_note": "SHA-256 detects byte-level changes. Authenticity requires a trusted manifest checksum or a future digital signature."
+}

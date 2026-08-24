@@ -1,0 +1,769 @@
+{
+  "$defs": {
+    "ActorType": {
+      "enum": [
+        "external",
+        "internal",
+        "third_party",
+        "unknown"
+      ],
+      "title": "ActorType",
+      "type": "string"
+    },
+    "AttackBehaviour": {
+      "additionalProperties": false,
+      "properties": {
+        "techniques": {
+          "items": {
+            "$ref": "#/$defs/MitreTechniqueReference"
+          },
+          "minItems": 1,
+          "title": "Techniques",
+          "type": "array"
+        },
+        "tactics": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Tactics",
+          "type": "array"
+        },
+        "attack_flow_reference": {
+          "anyOf": [
+            {
+              "format": "uri",
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Attack Flow Reference"
+        },
+        "narrative": {
+          "minLength": 20,
+          "title": "Narrative",
+          "type": "string"
+        }
+      },
+      "required": [
+        "techniques",
+        "narrative"
+      ],
+      "title": "AttackBehaviour",
+      "type": "object"
+    },
+    "AttackPlatform": {
+      "description": "Normalized Enterprise ATT&CK platform vocabulary used for asset matching.",
+      "enum": [
+        "Containers",
+        "ESXi",
+        "IaaS",
+        "Identity Provider",
+        "Linux",
+        "Network Devices",
+        "Office Suite",
+        "SaaS",
+        "Windows",
+        "macOS"
+      ],
+      "title": "AttackPlatform",
+      "type": "string"
+    },
+    "CiaDimensionWeight": {
+      "additionalProperties": false,
+      "properties": {
+        "weight": {
+          "maximum": 3,
+          "minimum": 0,
+          "title": "Weight",
+          "type": "integer"
+        },
+        "rationale": {
+          "minLength": 20,
+          "title": "Rationale",
+          "type": "string"
+        }
+      },
+      "required": [
+        "weight",
+        "rationale"
+      ],
+      "title": "CiaDimensionWeight",
+      "type": "object"
+    },
+    "CiaImpactProfile": {
+      "additionalProperties": false,
+      "description": "Scenario-level inherent CIA weighting; asset assessments may override it.",
+      "properties": {
+        "calibration": {
+          "const": "cia-0-3-v0.1",
+          "default": "cia-0-3-v0.1",
+          "title": "Calibration",
+          "type": "string"
+        },
+        "confidentiality": {
+          "$ref": "#/$defs/CiaDimensionWeight"
+        },
+        "integrity": {
+          "$ref": "#/$defs/CiaDimensionWeight"
+        },
+        "availability": {
+          "$ref": "#/$defs/CiaDimensionWeight"
+        },
+        "contextual_note": {
+          "minLength": 20,
+          "title": "Contextual Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "confidentiality",
+        "integrity",
+        "availability",
+        "contextual_note"
+      ],
+      "title": "CiaImpactProfile",
+      "type": "object"
+    },
+    "Consequences": {
+      "additionalProperties": false,
+      "properties": {
+        "confidentiality": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confidentiality"
+        },
+        "integrity": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Integrity"
+        },
+        "availability": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability"
+        },
+        "operational": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Operational"
+        },
+        "customer": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Customer"
+        },
+        "regulatory": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Regulatory"
+        }
+      },
+      "title": "Consequences",
+      "type": "object"
+    },
+    "MitreDomain": {
+      "enum": [
+        "enterprise",
+        "ics",
+        "mobile"
+      ],
+      "title": "MitreDomain",
+      "type": "string"
+    },
+    "MitreSubTechniqueReference": {
+      "additionalProperties": false,
+      "properties": {
+        "external_id": {
+          "pattern": "^T\\d{4}\\.\\d{3}$",
+          "title": "External Id",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 2,
+          "title": "Name",
+          "type": "string"
+        },
+        "source_url": {
+          "format": "uri",
+          "minLength": 1,
+          "title": "Source Url",
+          "type": "string"
+        },
+        "stix_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stix Id"
+        },
+        "upstream_modified_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Upstream Modified At"
+        }
+      },
+      "required": [
+        "external_id",
+        "name",
+        "source_url"
+      ],
+      "title": "MitreSubTechniqueReference",
+      "type": "object"
+    },
+    "MitreTechniqueReference": {
+      "additionalProperties": false,
+      "properties": {
+        "framework": {
+          "const": "MITRE ATT&CK",
+          "default": "MITRE ATT&CK",
+          "title": "Framework",
+          "type": "string"
+        },
+        "domain": {
+          "$ref": "#/$defs/MitreDomain"
+        },
+        "external_id": {
+          "pattern": "^T\\d{4}(?:\\.\\d{3})?$",
+          "title": "External Id",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 2,
+          "title": "Name",
+          "type": "string"
+        },
+        "source_version": {
+          "minLength": 1,
+          "title": "Source Version",
+          "type": "string"
+        },
+        "source_url": {
+          "format": "uri",
+          "minLength": 1,
+          "title": "Source Url",
+          "type": "string"
+        },
+        "upstream_platforms": {
+          "items": {
+            "$ref": "#/$defs/AttackPlatform"
+          },
+          "minItems": 1,
+          "title": "Upstream Platforms",
+          "type": "array"
+        },
+        "upstream_tactics": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Upstream Tactics",
+          "type": "array"
+        },
+        "upstream_subtechniques": {
+          "items": {
+            "$ref": "#/$defs/MitreSubTechniqueReference"
+          },
+          "title": "Upstream Subtechniques",
+          "type": "array"
+        },
+        "stix_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stix Id"
+        },
+        "upstream_modified_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Upstream Modified At"
+        }
+      },
+      "required": [
+        "domain",
+        "external_id",
+        "name",
+        "source_version",
+        "source_url",
+        "upstream_platforms",
+        "upstream_tactics"
+      ],
+      "title": "MitreTechniqueReference",
+      "type": "object"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "generator": {
+          "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$",
+          "title": "Generator",
+          "type": "string"
+        },
+        "generator_version": {
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$",
+          "title": "Generator Version",
+          "type": "string"
+        },
+        "generated_at": {
+          "format": "date-time",
+          "title": "Generated At",
+          "type": "string"
+        },
+        "source_snapshots": {
+          "items": {
+            "$ref": "#/$defs/SourceSnapshot"
+          },
+          "minItems": 1,
+          "title": "Source Snapshots",
+          "type": "array"
+        },
+        "transformation_summary": {
+          "minLength": 20,
+          "title": "Transformation Summary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "generator",
+        "generator_version",
+        "generated_at",
+        "source_snapshots",
+        "transformation_summary"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "ReviewDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/ReviewStatus",
+          "default": "pending"
+        },
+        "reviewer": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewer"
+        },
+        "decision_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Decision Date"
+        },
+        "rationale": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rationale"
+        }
+      },
+      "title": "ReviewDecision",
+      "type": "object"
+    },
+    "ReviewStatus": {
+      "enum": [
+        "pending",
+        "approved",
+        "changes_requested",
+        "rejected"
+      ],
+      "title": "ReviewStatus",
+      "type": "string"
+    },
+    "ScenarioStatus": {
+      "enum": [
+        "candidate",
+        "in_review",
+        "approved",
+        "rejected",
+        "retired",
+        "review_required"
+      ],
+      "title": "ScenarioStatus",
+      "type": "string"
+    },
+    "SourceSnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "minLength": 2,
+          "title": "Source",
+          "type": "string"
+        },
+        "version": {
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        },
+        "source_uri": {
+          "format": "uri",
+          "minLength": 1,
+          "title": "Source Uri",
+          "type": "string"
+        },
+        "retrieved_on": {
+          "format": "date",
+          "title": "Retrieved On",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "bundle_bytes": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bundle Bytes"
+        },
+        "local_reference": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Local Reference"
+        },
+        "local_reference_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Local Reference Sha256"
+        }
+      },
+      "required": [
+        "source",
+        "version",
+        "source_uri",
+        "retrieved_on"
+      ],
+      "title": "SourceSnapshot",
+      "type": "object"
+    },
+    "TargetContext": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_types": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Asset Types",
+          "type": "array"
+        },
+        "service_types": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "title": "Service Types",
+          "type": "array"
+        },
+        "platforms": {
+          "items": {
+            "$ref": "#/$defs/AttackPlatform"
+          },
+          "minItems": 1,
+          "title": "Platforms",
+          "type": "array"
+        },
+        "technology_context": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Technology Context",
+          "type": "array"
+        }
+      },
+      "required": [
+        "asset_types",
+        "platforms",
+        "technology_context"
+      ],
+      "title": "TargetContext",
+      "type": "object"
+    },
+    "ThreatContext": {
+      "additionalProperties": false,
+      "properties": {
+        "actor_types": {
+          "items": {
+            "$ref": "#/$defs/ActorType"
+          },
+          "minItems": 1,
+          "title": "Actor Types",
+          "type": "array"
+        },
+        "intent_context": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Intent Context",
+          "type": "array"
+        },
+        "capability_context": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Capability Context"
+        }
+      },
+      "required": [
+        "actor_types",
+        "intent_context"
+      ],
+      "title": "ThreatContext",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "default": "0.1.0",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "scenario_id": {
+      "pattern": "^RS-(?:CANDIDATE-\\d{4}|[A-Z][A-Z0-9]*-\\d{3})$",
+      "title": "Scenario Id",
+      "type": "string"
+    },
+    "version": {
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$",
+      "title": "Version",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/ScenarioStatus"
+    },
+    "family": {
+      "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$",
+      "title": "Family",
+      "type": "string"
+    },
+    "title": {
+      "minLength": 5,
+      "title": "Title",
+      "type": "string"
+    },
+    "threat": {
+      "$ref": "#/$defs/ThreatContext"
+    },
+    "target": {
+      "$ref": "#/$defs/TargetContext"
+    },
+    "preconditions": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Preconditions",
+      "type": "array"
+    },
+    "exposure_conditions": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Exposure Conditions",
+      "type": "array"
+    },
+    "attack_behaviour": {
+      "$ref": "#/$defs/AttackBehaviour"
+    },
+    "adverse_event": {
+      "minLength": 20,
+      "title": "Adverse Event",
+      "type": "string"
+    },
+    "consequences": {
+      "$ref": "#/$defs/Consequences"
+    },
+    "cia_impact": {
+      "$ref": "#/$defs/CiaImpactProfile"
+    },
+    "scenario_statement": {
+      "minLength": 40,
+      "title": "Scenario Statement",
+      "type": "string"
+    },
+    "defensive_requirements": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Defensive Requirements",
+      "type": "array"
+    },
+    "control_references": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Control References",
+      "type": "array"
+    },
+    "regulatory_references": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Regulatory References",
+      "type": "array"
+    },
+    "provenance": {
+      "$ref": "#/$defs/Provenance"
+    },
+    "review": {
+      "$ref": "#/$defs/ReviewDecision"
+    }
+  },
+  "required": [
+    "scenario_id",
+    "version",
+    "status",
+    "family",
+    "title",
+    "threat",
+    "target",
+    "preconditions",
+    "exposure_conditions",
+    "attack_behaviour",
+    "adverse_event",
+    "consequences",
+    "cia_impact",
+    "scenario_statement",
+    "provenance",
+    "review"
+  ],
+  "title": "RiskScenario",
+  "type": "object",
+  "$id": "urn:tbdl:schema:risk-scenario:0.1.0"
+}

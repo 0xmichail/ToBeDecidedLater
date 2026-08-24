@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=80"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tbdl-risk-engine"
+version = "0.1.0"
+description = "Clean-room threat-informed risk scenario compiler proof of concept"
+requires-python = ">=3.11"
+dependencies = [
+  "pydantic>=2.13.4,<3.0",
+  "PyYAML>=6.0.3,<7.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=9.1.1,<10.0",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --basetemp=.pytest-tmp"
+testpaths = ["tests"]
+pythonpath = ["src"]

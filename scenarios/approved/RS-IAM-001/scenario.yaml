@@ -1,0 +1,216 @@
+schema_version: 0.1.0
+scenario_id: RS-IAM-001
+version: 1.0.0
+status: approved
+family: credential_compromise
+title: Compromise of privileged credentials
+
+threat:
+  actor_types:
+    - external
+    - internal
+  intent_context:
+    - unauthorized access
+    - privilege abuse
+  capability_context: Ability to obtain, guess, reuse, or abuse legitimate credentials.
+
+target:
+  asset_types:
+    - application
+    - identity_service
+  service_types:
+    - business_service
+    - shared_service
+  platforms:
+    - Containers
+    - ESXi
+    - IaaS
+    - Identity Provider
+    - Linux
+    - Network Devices
+    - Office Suite
+    - SaaS
+    - Windows
+    - macOS
+  technology_context:
+    - Identity and access management
+    - Remote and privileged administration
+
+preconditions:
+  - Privileged or otherwise security-significant accounts exist for the assessed service.
+  - Legitimate credentials provide access to functions or data that could materially affect the assessed service.
+
+exposure_conditions:
+  - Authentication interfaces are reachable by users, administrators, services, or external integrations.
+  - Credential strength, protection, monitoring, or lifecycle controls may be insufficient for the assessed context.
+
+attack_behaviour:
+  techniques:
+    - framework: MITRE ATT&CK
+      domain: enterprise
+      external_id: T1078
+      name: Valid Accounts
+      source_version: "19.1"
+      source_url: https://attack.mitre.org/techniques/T1078/
+      stix_id: attack-pattern--b17a1a56-e99c-403c-8948-561df0cffe81
+      upstream_modified_at: 2026-05-12T15:12:00.707Z
+      upstream_platforms:
+        - Containers
+        - ESXi
+        - IaaS
+        - Identity Provider
+        - Linux
+        - macOS
+        - Network Devices
+        - Office Suite
+        - SaaS
+        - Windows
+      upstream_tactics:
+        - Stealth
+        - Persistence
+        - Privilege Escalation
+        - Initial Access
+      upstream_subtechniques:
+        - external_id: T1078.001
+          name: Default Accounts
+          source_url: https://attack.mitre.org/techniques/T1078/001/
+          stix_id: attack-pattern--6151cbea-819b-455a-9fa6-99a1cc58797d
+          upstream_modified_at: 2026-05-12T15:12:00.636Z
+        - external_id: T1078.002
+          name: Domain Accounts
+          source_url: https://attack.mitre.org/techniques/T1078/002/
+          stix_id: attack-pattern--c3d4bdd9-2cfe-4a80-9d0c-07a29ecdce8f
+          upstream_modified_at: 2026-05-12T15:12:00.714Z
+        - external_id: T1078.003
+          name: Local Accounts
+          source_url: https://attack.mitre.org/techniques/T1078/003/
+          stix_id: attack-pattern--fdc47f44-dd32-4b99-af5f-209f556f63c2
+          upstream_modified_at: 2026-05-12T15:12:00.726Z
+        - external_id: T1078.004
+          name: Cloud Accounts
+          source_url: https://attack.mitre.org/techniques/T1078/004/
+          stix_id: attack-pattern--f232fa7a-025c-4d43-abc7-318e81a73d65
+          upstream_modified_at: 2026-05-12T15:12:00.723Z
+    - framework: MITRE ATT&CK
+      domain: enterprise
+      external_id: T1110
+      name: Brute Force
+      source_version: "19.1"
+      source_url: https://attack.mitre.org/techniques/T1110/
+      stix_id: attack-pattern--a93494bb-4b80-4ea1-8695-3236a49916fd
+      upstream_modified_at: 2026-05-12T15:12:00.706Z
+      upstream_platforms:
+        - Containers
+        - ESXi
+        - IaaS
+        - Identity Provider
+        - Linux
+        - macOS
+        - Network Devices
+        - Office Suite
+        - SaaS
+        - Windows
+      upstream_tactics:
+        - Credential Access
+      upstream_subtechniques:
+        - external_id: T1110.001
+          name: Password Guessing
+          source_url: https://attack.mitre.org/techniques/T1110/001/
+          stix_id: attack-pattern--09c4c11e-4fa1-4f8c-8dad-3cf8e69ad119
+          upstream_modified_at: 2026-05-12T15:12:00.620Z
+        - external_id: T1110.002
+          name: Password Cracking
+          source_url: https://attack.mitre.org/techniques/T1110/002/
+          stix_id: attack-pattern--1d24cdee-9ea2-4189-b08e-af110bf2435d
+          upstream_modified_at: 2026-05-12T15:12:00.622Z
+        - external_id: T1110.003
+          name: Password Spraying
+          source_url: https://attack.mitre.org/techniques/T1110/003/
+          stix_id: attack-pattern--692074ae-bb62-4a5e-a735-02cb6bde458c
+          upstream_modified_at: 2025-10-24T17:48:53.996Z
+        - external_id: T1110.004
+          name: Credential Stuffing
+          source_url: https://attack.mitre.org/techniques/T1110/004/
+          stix_id: attack-pattern--b2d03cea-aec1-45ca-9744-9ee583c1e1cc
+          upstream_modified_at: 2026-05-12T15:12:00.708Z
+  tactics:
+    - Stealth
+    - Persistence
+    - Privilege Escalation
+    - Initial Access
+    - Credential Access
+  attack_flow_reference: null
+  narrative: >-
+    A threat actor obtains or guesses legitimate credentials and uses the resulting
+    valid account access to reach security-significant functions of the assessed service.
+
+adverse_event: >-
+  Unauthorized privileged access is obtained and used to perform actions against the
+  assessed service under the identity of a legitimate account.
+
+consequences:
+  confidentiality: Sensitive information may be accessed or disclosed without authorization.
+  integrity: Data, configuration, access rights, or transactions may be modified without authorization.
+  availability: Privileged actions may disrupt the service or prevent legitimate administrative access.
+  operational: Investigation, containment, credential recovery, and service restoration may interrupt operations.
+  customer: Customer accounts, data, transactions, or service availability may be affected depending on scope.
+  regulatory: Reporting or other legal obligations may arise depending on the affected data, service, and jurisdiction.
+
+cia_impact:
+  calibration: cia-0-3-v0.1
+  confidentiality:
+    weight: 3
+    rationale: >-
+      Privileged account access can directly expose sensitive information across the
+      services and resources available to the compromised identity.
+  integrity:
+    weight: 3
+    rationale: >-
+      Privileged account access can directly enable unauthorized changes to data,
+      configuration, permissions, and security-relevant transactions.
+  availability:
+    weight: 2
+    rationale: >-
+      Privileged actions can materially disrupt services or administrative access,
+      although disruption is not required for this scenario to succeed.
+  contextual_note: >-
+    These are inherent scenario-level weights. An assessment must recalibrate them
+    using the affected asset, information, business service, and operating context.
+
+scenario_statement: >-
+  A threat actor compromises or guesses legitimate privileged credentials and uses the
+  resulting valid account access to perform unauthorized actions against the assessed
+  service, potentially causing unauthorized disclosure, modification, or disruption of
+  information and services.
+
+defensive_requirements: []
+control_references: []
+regulatory_references: []
+
+provenance:
+  generator: scenario_compiler
+  generator_version: 0.1.0
+  generated_at: 2026-08-19T00:00:00Z
+  source_snapshots:
+    - source: MITRE ATT&CK Enterprise STIX 2.1
+      version: "19.1"
+      source_uri: https://raw.githubusercontent.com/mitre-attack/attack-stix-data/v19.1/enterprise-attack/enterprise-attack-19.1.json
+      retrieved_on: 2026-08-19
+      sha256: bdf1ce86a4e604214c5076d37ae4dcb322678afc528df8492e6fdc1b554f5da3
+      bundle_bytes: 53277393
+      local_reference: data/source-snapshots/mitre-attack/enterprise/19.1/T1078-T1110.json
+      local_reference_sha256: 7ce3e038b061ca61f991c8ed3cb88e34f585750e8b03b4ef1fca7988e799630b
+  transformation_summary: >-
+    Independently authored clean-room synthesis of two ATT&CK behaviours into a
+    contextual scenario, verified against the official ATT&CK 19.1 STIX snapshot;
+    no employer-specific methodology, control library, questionnaire, dataset,
+    mapping, findings, evidence, wording, or confidential/internal content was used.
+
+review:
+  status: approved
+  reviewer: Project owner
+  decision_date: 2026-08-19
+  rationale: >-
+    Approved for the authoritative methodology library after review of the
+    ATT&CK 19.1 provenance, platform, tactic and sub-technique mappings, CIA
+    impact weighting, and package and repository integrity controls.

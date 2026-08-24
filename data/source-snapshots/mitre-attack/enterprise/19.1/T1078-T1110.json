@@ -1,0 +1,122 @@
+{
+  "schema_version": "0.1.0",
+  "source": {
+    "bundle_bytes": 53277393,
+    "bundle_sha256": "bdf1ce86a4e604214c5076d37ae4dcb322678afc528df8492e6fdc1b554f5da3",
+    "name": "MITRE ATT&CK Enterprise STIX 2.1",
+    "retrieved_on": "2026-08-19",
+    "source_url": "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/v19.1/enterprise-attack/enterprise-attack-19.1.json",
+    "version": "19.1"
+  },
+  "techniques": [
+    {
+      "external_id": "T1078",
+      "modified": "2026-05-12T15:12:00.707Z",
+      "name": "Valid Accounts",
+      "object_version": "3.0",
+      "platforms": [
+        "Containers",
+        "ESXi",
+        "IaaS",
+        "Identity Provider",
+        "Linux",
+        "macOS",
+        "Network Devices",
+        "Office Suite",
+        "SaaS",
+        "Windows"
+      ],
+      "source_url": "https://attack.mitre.org/techniques/T1078",
+      "stix_id": "attack-pattern--b17a1a56-e99c-403c-8948-561df0cffe81",
+      "subtechniques": [
+        {
+          "external_id": "T1078.001",
+          "modified": "2026-05-12T15:12:00.636Z",
+          "name": "Default Accounts",
+          "source_url": "https://attack.mitre.org/techniques/T1078/001",
+          "stix_id": "attack-pattern--6151cbea-819b-455a-9fa6-99a1cc58797d"
+        },
+        {
+          "external_id": "T1078.002",
+          "modified": "2026-05-12T15:12:00.714Z",
+          "name": "Domain Accounts",
+          "source_url": "https://attack.mitre.org/techniques/T1078/002",
+          "stix_id": "attack-pattern--c3d4bdd9-2cfe-4a80-9d0c-07a29ecdce8f"
+        },
+        {
+          "external_id": "T1078.003",
+          "modified": "2026-05-12T15:12:00.726Z",
+          "name": "Local Accounts",
+          "source_url": "https://attack.mitre.org/techniques/T1078/003",
+          "stix_id": "attack-pattern--fdc47f44-dd32-4b99-af5f-209f556f63c2"
+        },
+        {
+          "external_id": "T1078.004",
+          "modified": "2026-05-12T15:12:00.723Z",
+          "name": "Cloud Accounts",
+          "source_url": "https://attack.mitre.org/techniques/T1078/004",
+          "stix_id": "attack-pattern--f232fa7a-025c-4d43-abc7-318e81a73d65"
+        }
+      ],
+      "tactics": [
+        "Stealth",
+        "Persistence",
+        "Privilege Escalation",
+        "Initial Access"
+      ]
+    },
+    {
+      "external_id": "T1110",
+      "modified": "2026-05-12T15:12:00.706Z",
+      "name": "Brute Force",
+      "object_version": "2.8",
+      "platforms": [
+        "Containers",
+        "ESXi",
+        "IaaS",
+        "Identity Provider",
+        "Linux",
+        "macOS",
+        "Network Devices",
+        "Office Suite",
+        "SaaS",
+        "Windows"
+      ],
+      "source_url": "https://attack.mitre.org/techniques/T1110",
+      "stix_id": "attack-pattern--a93494bb-4b80-4ea1-8695-3236a49916fd",
+      "subtechniques": [
+        {
+          "external_id": "T1110.001",
+          "modified": "2026-05-12T15:12:00.620Z",
+          "name": "Password Guessing",
+          "source_url": "https://attack.mitre.org/techniques/T1110/001",
+          "stix_id": "attack-pattern--09c4c11e-4fa1-4f8c-8dad-3cf8e69ad119"
+        },
+        {
+          "external_id": "T1110.002",
+          "modified": "2026-05-12T15:12:00.622Z",
+          "name": "Password Cracking",
+          "source_url": "https://attack.mitre.org/techniques/T1110/002",
+          "stix_id": "attack-pattern--1d24cdee-9ea2-4189-b08e-af110bf2435d"
+        },
+        {
+          "external_id": "T1110.003",
+          "modified": "2025-10-24T17:48:53.996Z",
+          "name": "Password Spraying",
+          "source_url": "https://attack.mitre.org/techniques/T1110/003",
+          "stix_id": "attack-pattern--692074ae-bb62-4a5e-a735-02cb6bde458c"
+        },
+        {
+          "external_id": "T1110.004",
+          "modified": "2026-05-12T15:12:00.708Z",
+          "name": "Credential Stuffing",
+          "source_url": "https://attack.mitre.org/techniques/T1110/004",
+          "stix_id": "attack-pattern--b2d03cea-aec1-45ca-9744-9ee583c1e1cc"
+        }
+      ],
+      "tactics": [
+        "Credential Access"
+      ]
+    }
+  ]
+}

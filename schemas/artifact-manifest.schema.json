@@ -1,0 +1,225 @@
+{
+  "$defs": {
+    "ArtifactDigest": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/$defs/ArtifactRole"
+        },
+        "media_type": {
+          "minLength": 3,
+          "title": "Media Type",
+          "type": "string"
+        },
+        "bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "role",
+        "media_type",
+        "bytes",
+        "sha256"
+      ],
+      "title": "ArtifactDigest",
+      "type": "object"
+    },
+    "ArtifactRole": {
+      "enum": [
+        "canonical_scenario",
+        "human_review_view",
+        "json_schema",
+        "source_snapshot",
+        "package_manifest",
+        "manifest_checksum",
+        "project_file"
+      ],
+      "title": "ArtifactRole",
+      "type": "string"
+    },
+    "SourceSnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "minLength": 2,
+          "title": "Source",
+          "type": "string"
+        },
+        "version": {
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        },
+        "source_uri": {
+          "format": "uri",
+          "minLength": 1,
+          "title": "Source Uri",
+          "type": "string"
+        },
+        "retrieved_on": {
+          "format": "date",
+          "title": "Retrieved On",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "bundle_bytes": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bundle Bytes"
+        },
+        "local_reference": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Local Reference"
+        },
+        "local_reference_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Local Reference Sha256"
+        }
+      },
+      "required": [
+        "source",
+        "version",
+        "source_uri",
+        "retrieved_on"
+      ],
+      "title": "SourceSnapshot",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "default": "0.1.0",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "package_id": {
+      "minLength": 3,
+      "title": "Package Id",
+      "type": "string"
+    },
+    "package_version": {
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$",
+      "title": "Package Version",
+      "type": "string"
+    },
+    "package_status": {
+      "minLength": 3,
+      "title": "Package Status",
+      "type": "string"
+    },
+    "generated_at": {
+      "minLength": 10,
+      "title": "Generated At",
+      "type": "string"
+    },
+    "generator": {
+      "minLength": 2,
+      "title": "Generator",
+      "type": "string"
+    },
+    "generator_version": {
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$",
+      "title": "Generator Version",
+      "type": "string"
+    },
+    "hash_algorithm": {
+      "const": "sha256",
+      "default": "sha256",
+      "title": "Hash Algorithm",
+      "type": "string"
+    },
+    "artifacts": {
+      "items": {
+        "$ref": "#/$defs/ArtifactDigest"
+      },
+      "minItems": 1,
+      "title": "Artifacts",
+      "type": "array"
+    },
+    "source_snapshots": {
+      "items": {
+        "$ref": "#/$defs/SourceSnapshot"
+      },
+      "minItems": 1,
+      "title": "Source Snapshots",
+      "type": "array"
+    },
+    "signature_status": {
+      "const": "unsigned",
+      "default": "unsigned",
+      "title": "Signature Status",
+      "type": "string"
+    },
+    "verification_note": {
+      "minLength": 20,
+      "title": "Verification Note",
+      "type": "string"
+    }
+  },
+  "required": [
+    "package_id",
+    "package_version",
+    "package_status",
+    "generated_at",
+    "generator",
+    "generator_version",
+    "artifacts",
+    "source_snapshots",
+    "verification_note"
+  ],
+  "title": "ArtifactManifest",
+  "type": "object",
+  "$id": "urn:tbdl:schema:artifact-manifest:0.1.0"
+}
