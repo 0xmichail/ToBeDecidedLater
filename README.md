@@ -77,6 +77,28 @@ Human-Certified Risk Scenario
                   POA&M
 ```
 
+## What exists today
+
+- One approved example risk scenario.
+- Project-native scenario schema.
+- Integrity manifests.
+- Initial documentation and architecture notes.
+- Early source code and tests.
+
+## What does not exist yet
+
+- No production-grade product.
+- No complete control library.
+- No regulatory mapping engine.
+- No UI.
+- No AI automation in the approval path.
+
+## Private-to-public release model
+
+Development happens privately first. Public releases contain only reviewed, cleaned, and approved artifacts.
+
+See [`docs/release-model.md`](docs/release-model.md) for the public release model.
+
 ## External frameworks, tools, and authoritative sources
 
 This project is designed to work with public/open cybersecurity, assurance, and regulatory sources. References to these sources do not imply endorsement, sponsorship, certification, or affiliation.
@@ -106,6 +128,7 @@ See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) for third-party notices, 
 - [`docs/06-technical-environment.md`](docs/06-technical-environment.md)
 - [`docs/07-roadmap.md`](docs/07-roadmap.md)
 - [`docs/decision-log.md`](docs/decision-log.md)
+- [`docs/release-model.md`](docs/release-model.md)
 
 ## License
 
