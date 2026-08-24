@@ -41,40 +41,20 @@ AI output is treated as a draft, not as an authority.
 
 ## Core Concept
 
-```text
-System Context
-     |
-     v
-Threat Relevance
-     |
-MITRE ATT&CK + Attack Flow
-     |
-     v
-Risk Scenario Compiler
-     |
-     v
-Human-Certified Risk Scenario
-     |
-     +----> MITRE D3FEND
-     |
-     +----> Independent Controls
-     |
-     +----> Regulatory Requirements
-                    |
-                    v
-                  OSCAL
-        Catalog / Profile / Mapping
-                    |
-                    v
-                Assessment
-                    |
-            Evidence / Findings
-                    |
-                    v
-              Residual Risk
-                    |
-                    v
-                  POA&M
+Conceptual high-level flow, not a final implementation architecture:
+
+```mermaid
+flowchart TD
+    A[System context] --> B[Threat relevance]
+    B --> C[ATT&CK / Attack Flow]
+    C --> D[Risk scenario compiler]
+    D --> E[Human-certified scenario]
+
+    E --> F[Defensive, control, and regulatory mapping]
+    F --> G[OSCAL artifacts]
+    G --> H[Assessment]
+    H --> I[Evidence / findings]
+    I --> J[Residual risk / POA&M]
 ```
 
 ## What exists today
