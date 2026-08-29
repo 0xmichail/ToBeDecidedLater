@@ -18,11 +18,13 @@ The proposed idea is not composed of entirely novel individual building blocks. 
 - financial-sector threat-informed mappings through MITRE CTID / CRI;
 - academic work connecting attack graphs/threat intelligence with OSCAL.
 
-The potential differentiation is therefore the **end-to-end composition and risk abstraction layer**, not the existence of any single source or standard.
+The potential differentiation is therefore the **risk-assessment methodology, contextual risk abstraction, executable reasoning, and end-to-end traceability**, not the existence of any single source, mapping, or standard.
 
 ## Research Hypothesis
 
-The opportunity appears to be a framework that performs:
+The research hypothesis is that a machine-assisted, threat-informed cyber risk assessment methodology and executable reasoning engine can reduce analyst variance and improve consistency, reproducibility, traceability, and explainability without removing necessary human judgment.
+
+The intended reasoning chain is:
 
 ```text
 System context
@@ -37,29 +39,45 @@ Attack behaviour / Attack Flow
 Contextual risk scenario
      |
      v
-Risk reasoning
+Inherent risk reasoning
      |
      v
 Defensive requirement
      |
      v
-Independent controls
+Independent controls + evidence expectations
      |
      v
-Regulatory mappings
+Assessment / findings
      |
      v
-OSCAL representation
-     |
-     v
-Evidence / findings / treatment
+Residual risk / treatment
 ```
 
-The important middle layer is:
+Regulatory requirements constrain and extend the chain where applicable. OSCAL is used downstream for machine-readable interoperability and representation.
 
-> **technical adversary behaviour -> contextual cyber risk scenario**
+The important research layers are:
 
-This should be treated as the core research/engineering hypothesis.
+> **technical adversary behaviour -> contextual cyber risk scenario -> explicit risk reasoning -> evidence-supported residual risk**
+
+These should be treated as the core methodology and engineering hypotheses.
+
+## What Must Be Demonstrated
+
+The project should not claim methodological superiority based on architecture alone. The hypothesis should eventually be tested using synthetic or otherwise permitted assessment cases.
+
+Candidate evaluation dimensions include:
+
+- inter-reviewer consistency for comparable system contexts;
+- deterministic reproducibility of machine-executable decisions;
+- relevant versus incorrectly activated risk scenarios;
+- reviewer rejection, override, and correction rates;
+- duplicate scenario generation;
+- completeness of threat-to-scenario-to-control-to-evidence traceability;
+- consistency of inherent and residual risk reasoning;
+- time and effort compared with a predominantly manual assessment process.
+
+No current performance claim is implied by listing these measures.
 
 ## Prior Art / Adjacent Areas to Track
 
@@ -114,26 +132,34 @@ Track work around:
 - threat-intelligence knowledge graphs;
 - automated generation of OSCAL SSP/assessment results;
 - compliance-as-code;
-- evidence interoperability.
+- evidence interoperability;
+- analyst variance and inter-rater reliability in cyber risk assessment;
+- explainable and reproducible risk-scoring methodologies.
 
 ## Proposed Differentiation
 
 1. Threat-informed but explicitly **risk-oriented** abstraction.
-2. Human-certified scenario methodology.
-3. Independent controls rather than copied proprietary catalogs.
-4. Regulatory requirements as first-class structured objects.
-5. OSCAL-native interoperability.
-6. Evidence and treatment traceability.
-7. Versioned source provenance.
-8. Separation of deterministic logic, AI assistance and human accountability.
+2. Explicit, machine-executable methodology rules where defensible.
+3. Human-certified scenario and judgment gates where automation is not defensible.
+4. Independent controls rather than copied proprietary catalogs.
+5. Regulatory requirements as first-class structured constraints and traceability objects.
+6. OSCAL-native downstream interoperability.
+7. Evidence and treatment traceability.
+8. Versioned source provenance.
+9. Separation of deterministic logic, AI assistance and human accountability.
+10. Empirical evaluation of consistency and reviewer variance rather than assuming methodology quality.
 
 ## Questions Still Open
 
 - What formal risk-scenario grammar should be adopted?
+- Which assessment decisions can be made deterministic without creating false precision?
+- How should inherent risk be calibrated and validated?
 - How much of scenario relevance can be deterministic?
 - Should consequence taxonomies use CIA only or richer operational/customer/regulatory dimensions?
+- How should control effectiveness influence residual risk without hiding professional judgment inside arbitrary formulas?
 - What is the right relationship between Attack Flow and scenario families?
 - What is the best initial public control source/reference set?
 - How should regulatory requirement normalization be governed?
+- What experimental design can measure analyst variance and methodology consistency credibly?
 - At what point does a graph database provide enough value to justify operational complexity?
 - Which contribution should eventually be proposed back to OSCAL/MITRE communities?
