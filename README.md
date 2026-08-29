@@ -2,9 +2,9 @@
 
 Working title. Serious problem. Unsettled name.
 
-This is an early-stage research and engineering workspace for an open, threat-informed cyber assurance framework.
+This is an early-stage research and engineering workspace exploring a machine-assisted, threat-informed cyber risk assessment methodology and executable reasoning engine.
 
-The project explores how system context, adversary behavior, control expectations, evidence, regulatory requirements, and human review can be connected in a more structured and auditable way.
+The project investigates whether repeatable parts of cyber risk assessment can be represented as structured data, explicit rules, deterministic code, versioned authoritative inputs, and review decisions in order to improve consistency, reproducibility, traceability, and explainability without automating away necessary human judgment.
 
 ## Personal disclaimer
 
@@ -16,16 +16,17 @@ This project is independent and published in a personal capacity.
 
 ## Vision
 
-Build an independent, open-standard-native cyber risk and assurance framework that connects:
+Develop an independent, open-standard-native cyber risk assessment methodology and executable reasoning engine that connects:
 
 - system and service context;
-- threat-informed risk scenarios;
+- threat relevance and threat-informed risk scenarios;
 - MITRE ATT&CK / Attack Flow adversary behaviour;
+- explicit inherent-risk reasoning;
 - MITRE D3FEND defensive knowledge;
-- an independently authored control library;
+- independently authored controls and evidence expectations;
 - regulatory requirements such as DORA, NIS2 and Greek ADAE requirements;
 - OSCAL catalogs, profiles, mappings and assessment artefacts;
-- evidence, findings, residual risk and treatment.
+- findings, residual risk and treatment.
 
 The target philosophy is:
 
@@ -45,17 +46,24 @@ Conceptual high-level flow, not a final implementation architecture:
 
 ```mermaid
 flowchart TD
-    A[System context] --> B[Threat relevance]
+    A[System / service context] --> B[Threat relevance]
     B --> C[ATT&CK / Attack Flow]
-    C --> D[Risk scenario compiler]
-    D --> E[Human-certified scenario]
-
-    E --> F[Defensive, control, and regulatory mapping]
-    F --> G[OSCAL artifacts]
-    G --> H[Assessment]
-    H --> I[Evidence / findings]
-    I --> J[Residual risk / POA&M]
+    C --> D[Contextual risk scenarios]
+    D --> E[Inherent risk reasoning]
+    E --> F[Required defensive outcomes]
+    F --> G[D3FEND + independent controls]
+    G --> H[Control expectations + evidence]
+    H --> I[Assessment / findings]
+    I --> J[Residual risk]
+    J --> K[Treatment / acceptance]
 ```
+
+**Role boundaries:**
+
+- **OSCAL** = downstream interoperability and representation.
+- **Code** = deterministic execution of explicit methodology rules.
+- **AI** = assistance, challenge, and drafting.
+- **Human** = review, judgment, approval, and risk acceptance.
 
 ## What exists today
 
@@ -67,7 +75,8 @@ flowchart TD
 
 ## What does not exist yet
 
-- No production-grade product.
+- No validated end-to-end methodology implementation.
+- No production-grade reasoning engine or product.
 - No complete control library.
 - No regulatory mapping engine.
 - No UI.
@@ -124,4 +133,4 @@ Third-party materials, standards, frameworks, regulatory texts, MITRE content, O
 
 **Phase:** research / architecture definition.
 
-No production-grade framework, deployed product, or authoritative control/risk catalog exists yet.
+No validated end-to-end methodology implementation, production-grade reasoning engine, deployed product, or authoritative control/risk catalog exists yet.
