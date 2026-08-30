@@ -29,11 +29,11 @@
       "sha256": "a06b2fa47cf000d15d34aacd2ccdbf6588aa4eb42500d67f441d6cacbdf4d551"
     },
     {
-      "bytes": 5739,
+      "bytes": 6978,
       "media_type": "text/markdown",
       "path": "README.md",
       "role": "project_file",
-      "sha256": "8c76cb88fd746818e81a1a25e395fef4b5b2f3ca6e7cce49516394d4aa82213d"
+      "sha256": "2de26c9778eca6ffa7aaefa624ebc4bf82159a6f2c86da8df62329e73a23ccc0"
     },
     {
       "bytes": 3888,
@@ -57,11 +57,11 @@
       "sha256": "4adcc9ec267805aa921469d3771a896689f689323e4879932e0f4b3b67ec5c34"
     },
     {
-      "bytes": 3623,
+      "bytes": 6006,
       "media_type": "text/markdown",
       "path": "docs/01-project-vision.md",
       "role": "project_file",
-      "sha256": "1cbf5acd79755d4df0003986e56016dbb83cd15cc1b80c378a1ef5e8617d8262"
+      "sha256": "ea774bea59c004d0716d2a73f2b3546ecf7721a3622db2722b5604c89dea0ffd"
     },
     {
       "bytes": 6719,
@@ -85,11 +85,11 @@
       "sha256": "828e5219874c73a1a790e9ed9c6f49bcf542d57f300bf96dea2d2d8b1fc89646"
     },
     {
-      "bytes": 4519,
+      "bytes": 6618,
       "media_type": "text/markdown",
       "path": "docs/05-research-landscape.md",
       "role": "project_file",
-      "sha256": "8653cdaa06d8603fec5337498809e44127ca8d9b5a63d501cc00038568b256ec"
+      "sha256": "9de016e644ff921ca77285777cd0a8287c04974f0d14f3688f409eb7d4abaf9d"
     },
     {
       "bytes": 3730,
@@ -106,11 +106,25 @@
       "sha256": "56b2aa950752d170f408bc3d89dbc02a406bbf0f0197414990cd351814d2dbdd"
     },
     {
-      "bytes": 7107,
+      "bytes": 5186,
+      "media_type": "text/markdown",
+      "path": "docs/08-design-decisions.md",
+      "role": "project_file",
+      "sha256": "7b8584ee2f578a3e977b97f707aa9b2fe14930c9dda7d6549d14654a98585e45"
+    },
+    {
+      "bytes": 10994,
       "media_type": "text/markdown",
       "path": "docs/decision-log.md",
       "role": "project_file",
-      "sha256": "0035ea1bf8b77414ea06ecb606920c678f484f2c0b009e0820e00881033a7fdc"
+      "sha256": "0c5d1288ec85aa1975976c9ed1ee101b8571ee9edb840ce2554a80872efbadd0"
+    },
+    {
+      "bytes": 802,
+      "media_type": "text/markdown",
+      "path": "docs/release-model.md",
+      "role": "project_file",
+      "sha256": "13b183f3386bd85b6e8514d3fe47a35eb1ee0807f842dbe8531de219987153f6"
     },
     {
       "bytes": 592,
