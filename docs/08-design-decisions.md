@@ -1,5 +1,7 @@
 # Design Decisions
 
+Approval terminology and current scoring limitations are defined in [Validation status](validation-status.md). Approval is internal to the project and does not constitute independent validation or certification.
+
 Status: Draft
 
 This document records early design decisions for the project. The goal is to make assumptions, trade-offs, and boundaries visible while the framework is still being shaped.
@@ -58,7 +60,7 @@ The project should not treat D3FEND as a full control framework, regulatory cont
 
 **Current position:** D3FEND is an input for defensive reasoning, not the authoritative project control library.
 
-## DD-005 — Keep human certification in the approval path
+## DD-005 — Keep human review in the approval path
 
 The project may use rules, structured data, and AI-assisted drafting, but scenario approval and methodology decisions remain human-owned.
 
@@ -69,7 +71,7 @@ AI can help draft, compare, structure, and test ideas. It should not be treated 
 - Automation can reduce repetitive work and improve consistency.
 - Fully automated risk or assurance outputs can create false confidence if they are not reviewed in context.
 
-**Current position:** AI assists; human reviewers certify.
+**Current position:** AI assists; human reviewers decide.
 
 ## DD-006 — Prefer private-to-public release for sensitive development work
 

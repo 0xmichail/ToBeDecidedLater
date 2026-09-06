@@ -1,5 +1,7 @@
 # Risk Scenario Compiler
 
+Approval terminology and current scoring limitations are defined in [Validation status](validation-status.md). Approval is internal to the project and does not constitute independent validation or certification.
+
 ## Objective
 
 Build a semi-automated engine that turns structured MITRE threat knowledge plus system context into candidate cyber risk scenarios.
@@ -168,7 +170,7 @@ review:
 
 ## Human Approval Gate #1
 
-The reviewer certifies whether:
+The reviewer assesses whether:
 
 - the scenario has meaningful cyber-risk semantics;
 - the ATT&CK relationship is reasonable;
@@ -176,7 +178,7 @@ The reviewer certifies whether:
 - preconditions are defensible;
 - consequences are not overstated;
 - duplicate scenarios should be merged;
-- the scenario should enter the authoritative library.
+- the scenario should enter the project-approved experimental library.
 
 Approved scenarios receive a stable ID and version.
 
@@ -211,7 +213,7 @@ Control mappings require a second explicit review:
 
 > Do these controls materially address this approved risk scenario?
 
-Only approved relationships should be used to generate an authoritative OSCAL Profile.
+Only approved relationships should be used to generate a project-approved OSCAL Profile.
 
 ## OSCAL Output Per Scenario
 

@@ -29,6 +29,8 @@ Keep entries short enough to be readable, but specific enough that a future read
 
 ## Decisions
 
+For the current meaning of project approval and the scoring limitation affecting the historical example, see [D-016](#d-016---clarify-public-validation-and-approval-status) and [Validation status](validation-status.md).
+
 ## D-001 - Independent clean-room project
 
 **Status:** Accepted
@@ -178,6 +180,24 @@ Future material decisions should use the structured entry format in this file wh
 Rationale: this project is intended to be auditable as a research and engineering workspace. Decisions should show not only what was selected, but why it was selected, what alternatives were considered, what trade-offs were accepted, and when the decision should be revisited.
 
 Existing decisions remain valid and do not need to be rewritten immediately. They may be expanded into the structured format when they are revisited.
+
+## D-016 - Clarify public validation and approval status
+
+**Date:** 2026-09-06
+
+**Status:** Accepted
+
+**Owner:** Project owner
+
+**Related files:** `README.md`, `docs/validation-status.md`, `scenarios/README.md`, `docs/07-roadmap.md`, `docs/05-research-landscape.md`
+
+**Decision:** Describe approval as internal project review, not independent validation or certification. Publish an explicit limitation notice for the CIA ratings and total in RS-IAM-001 version 1.0.0. Replace unvalidated delivery forecasts with a bounded evaluation milestone and research questions.
+
+**Reason:** The existing public wording and numeric scores may imply a level of validation that has not been demonstrated. Traceability and structural checks do not validate risk judgments.
+
+**Impact:** This clarification qualifies current use of the historical example and the approval terminology in D-004 and D-014. Those historical entries and the approved scenario package remain unchanged. Current explanatory documents use human review and project approval terminology. No replacement scoring model is adopted.
+
+**Review trigger:** Proposed scoring criteria have been tested on contextual and boundary cases and reviewed. Any approved scenario revision must receive a new version and a recorded decision.
 
 ## Open Decisions
 
