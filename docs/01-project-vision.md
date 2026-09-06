@@ -1,5 +1,7 @@
 # Project Vision
 
+Approval terminology and current scoring limitations are defined in [Validation status](validation-status.md). Approval is internal to the project and does not constitute independent validation or certification.
+
 ## Problem Statement
 
 Cyber risk and compliance work is still frequently managed as documents: spreadsheets, questionnaires, PDFs, screenshots, manual mappings and periodic evidence collection. This creates duplicated work, weak traceability, inconsistent control selection, difficult versioning and limited automation.
@@ -45,9 +47,9 @@ Use MITRE ATT&CK as authoritative structured adversary-behaviour knowledge and A
 
 Create a project-specific abstraction layer that transforms technical threat behaviour plus system context into human-readable and machine-readable cyber risk scenarios.
 
-### Human Certification
+### Human Review and Project Approval
 
-Generated scenarios are candidates only. A human reviewer must approve, modify or reject each scenario before it becomes part of the authoritative methodology library.
+Generated scenarios are candidates only. A human reviewer must approve, modify or reject each scenario before it becomes part of the project-approved experimental library.
 
 ### Defensive Knowledge
 

@@ -14,6 +14,30 @@ They do not represent, imply, or communicate the views, positions, methodologies
 
 This project is independent and published in a personal capacity.
 
+## What exists today
+
+- One project-owner-approved experimental scenario; see the [scenario index and limitations](scenarios/README.md).
+- Project-native scenario schema.
+- Integrity manifests.
+- Initial documentation and architecture notes.
+- Early source code and tests.
+
+## What does not exist yet
+
+- No production-grade product.
+- No complete control library.
+- No regulatory mapping engine.
+- No UI.
+- No AI automation in the approval path.
+
+## Current validation status
+
+This repository contains an early research prototype and one scenario approved by the project owner for inclusion in the experimental library. Project approval does not constitute independent validation or certification.
+
+The published CIA ratings and aggregate score do not yet have a documented, validated calibration basis. They should not be used to score or compare systems or to support operational risk decisions. Read the [dated scoring limitation notice](docs/validation-status.md) before using the example.
+
+Source provenance, integrity checks, and schema validation support traceability and structural consistency; they do not establish the correctness of risk judgments. Practical usefulness and assessment consistency remain to be evaluated.
+
 ## Vision
 
 Build an independent, open-standard-native cyber risk and assurance framework that connects:
@@ -29,7 +53,7 @@ Build an independent, open-standard-native cyber risk and assurance framework th
 
 The target philosophy is:
 
-> **Rules calculate. Authoritative data supports. AI assists. Human reviewers certify.**
+> **Rules support consistent processing. Authoritative sources inform. AI assists. Human reviewers decide.**
 
 ## AI-assisted, human-owned
 
@@ -48,7 +72,7 @@ flowchart TD
     A[System context] --> B[Threat relevance]
     B --> C[ATT&CK / Attack Flow]
     C --> D[Risk scenario compiler]
-    D --> E[Human-certified scenario]
+    D --> E[Project-approved experimental scenario]
 
     E --> F[Defensive, control, and regulatory mapping]
     F --> G[OSCAL artifacts]
@@ -56,22 +80,6 @@ flowchart TD
     H --> I[Evidence / findings]
     I --> J[Residual risk / POA&M]
 ```
-
-## What exists today
-
-- One approved example risk scenario.
-- Project-native scenario schema.
-- Integrity manifests.
-- Initial documentation and architecture notes.
-- Early source code and tests.
-
-## What does not exist yet
-
-- No production-grade product.
-- No complete control library.
-- No regulatory mapping engine.
-- No UI.
-- No AI automation in the approval path.
 
 ## Private-to-public release model
 

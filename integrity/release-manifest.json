@@ -15,34 +15,6 @@
       "sha256": "cf71c9a286fbaadc7a66d2ffe2e85a147ac9238b01b225ab0380d5f375f356f8"
     },
     {
-      "bytes": 11304,
-      "media_type": "application/octet-stream",
-      "path": "LICENSE",
-      "role": "project_file",
-      "sha256": "befffb9b7188b336fb56379831e8ef28369d1e031198968b4b11f80cd2666f3d"
-    },
-    {
-      "bytes": 1405,
-      "media_type": "text/markdown",
-      "path": "LICENSE-docs.md",
-      "role": "project_file",
-      "sha256": "a06b2fa47cf000d15d34aacd2ccdbf6588aa4eb42500d67f441d6cacbdf4d551"
-    },
-    {
-      "bytes": 5739,
-      "media_type": "text/markdown",
-      "path": "README.md",
-      "role": "project_file",
-      "sha256": "8c76cb88fd746818e81a1a25e395fef4b5b2f3ca6e7cce49516394d4aa82213d"
-    },
-    {
-      "bytes": 3888,
-      "media_type": "text/markdown",
-      "path": "THIRD_PARTY_NOTICES.md",
-      "role": "project_file",
-      "sha256": "8cf82cdf966300d2a8539a32dab579ee358244a938215d38de76bc59644460c8"
-    },
-    {
       "bytes": 4090,
       "media_type": "application/json",
       "path": "data/source-snapshots/mitre-attack/enterprise/19.1/T1078-T1110.json",
@@ -57,11 +29,11 @@
       "sha256": "4adcc9ec267805aa921469d3771a896689f689323e4879932e0f4b3b67ec5c34"
     },
     {
-      "bytes": 3623,
+      "bytes": 3854,
       "media_type": "text/markdown",
       "path": "docs/01-project-vision.md",
       "role": "project_file",
-      "sha256": "1cbf5acd79755d4df0003986e56016dbb83cd15cc1b80c378a1ef5e8617d8262"
+      "sha256": "e3aeed52ac1fd472e4ab7bbd841e855e8bf84fe5030521028e671df0e1e42864"
     },
     {
       "bytes": 6719,
@@ -71,11 +43,11 @@
       "sha256": "18c05c8eb494bc9c8df39f7d042b81bc343be5597b5fe985ccf8b71fa0203141"
     },
     {
-      "bytes": 5584,
+      "bytes": 5814,
       "media_type": "text/markdown",
       "path": "docs/03-risk-scenario-compiler.md",
       "role": "project_file",
-      "sha256": "9661302031a652c9d3e2cc4d736878cea798750f5502b7b3db146265d550539b"
+      "sha256": "722718ab546891f9be76b1cf09e43aa9d9c476bf9bb970a58e19dd9aefe6e96d"
     },
     {
       "bytes": 3818,
@@ -85,11 +57,11 @@
       "sha256": "828e5219874c73a1a790e9ed9c6f49bcf542d57f300bf96dea2d2d8b1fc89646"
     },
     {
-      "bytes": 4519,
+      "bytes": 2764,
       "media_type": "text/markdown",
       "path": "docs/05-research-landscape.md",
       "role": "project_file",
-      "sha256": "8653cdaa06d8603fec5337498809e44127ca8d9b5a63d501cc00038568b256ec"
+      "sha256": "5a93448668292d7c02dc91d589ad513097c9f437109afdfec0c2d4e1bccadc32"
     },
     {
       "bytes": 3730,
@@ -99,18 +71,53 @@
       "sha256": "b35267a8d869c243380514ca94362c91ca6d6279f404af9733a367296b4e703d"
     },
     {
-      "bytes": 4297,
+      "bytes": 3086,
       "media_type": "text/markdown",
       "path": "docs/07-roadmap.md",
       "role": "project_file",
-      "sha256": "56b2aa950752d170f408bc3d89dbc02a406bbf0f0197414990cd351814d2dbdd"
+      "sha256": "08099e87a635c5ed71f6a7d03fb27718339766d1a053fc2f0e1670990b5be7e6"
     },
     {
-      "bytes": 7107,
+      "bytes": 5391,
+      "media_type": "text/markdown",
+      "path": "docs/08-design-decisions.md",
+      "role": "project_file",
+      "sha256": "fc13453d8e56462082297e554b21d6fc3b4044bdc4955031baec002da1fbc760"
+    },
+    {
+      "bytes": 12497,
       "media_type": "text/markdown",
       "path": "docs/decision-log.md",
       "role": "project_file",
-      "sha256": "0035ea1bf8b77414ea06ecb606920c678f484f2c0b009e0820e00881033a7fdc"
+      "sha256": "0fdf2ba4315c6e6981efa390678eaf91e6de5e4606e498b476915c1654cfdbe2"
+    },
+    {
+      "bytes": 802,
+      "media_type": "text/markdown",
+      "path": "docs/release-model.md",
+      "role": "project_file",
+      "sha256": "13b183f3386bd85b6e8514d3fe47a35eb1ee0807f842dbe8531de219987153f6"
+    },
+    {
+      "bytes": 2440,
+      "media_type": "text/markdown",
+      "path": "docs/validation-status.md",
+      "role": "project_file",
+      "sha256": "5be1f5ef04b1193fac91e4e8e0ade422c38b6a623f436a98b22351ee44d222e1"
+    },
+    {
+      "bytes": 11304,
+      "media_type": "application/octet-stream",
+      "path": "LICENSE",
+      "role": "project_file",
+      "sha256": "befffb9b7188b336fb56379831e8ef28369d1e031198968b4b11f80cd2666f3d"
+    },
+    {
+      "bytes": 1405,
+      "media_type": "text/markdown",
+      "path": "LICENSE-docs.md",
+      "role": "project_file",
+      "sha256": "a06b2fa47cf000d15d34aacd2ccdbf6588aa4eb42500d67f441d6cacbdf4d551"
     },
     {
       "bytes": 592,
@@ -118,6 +125,13 @@
       "path": "pyproject.toml",
       "role": "project_file",
       "sha256": "b1295094f3670de39440e5db5b0902a51fcb15c68f9714db7a7c6efc42358499"
+    },
+    {
+      "bytes": 7123,
+      "media_type": "text/markdown",
+      "path": "README.md",
+      "role": "project_file",
+      "sha256": "419e9314167b3f056ef6583ed360b2bfb5ec096d9201620fc02d9250f63be571"
     },
     {
       "bytes": 1513,
@@ -146,6 +160,13 @@
       "path": "scenarios/approved/RS-IAM-001/scenario.yaml",
       "role": "canonical_scenario",
       "sha256": "9c544913ab3bfcc18710c7ce1fe83e4235bb2ac20b7abea3a0f27753075ce779"
+    },
+    {
+      "bytes": 857,
+      "media_type": "text/markdown",
+      "path": "scenarios/README.md",
+      "role": "project_file",
+      "sha256": "d5f18e97ba2d20c26a70fe16669fff40ea75150f00d586b1a95002e6807fff8f"
     },
     {
       "bytes": 5062,
@@ -244,6 +265,13 @@
       "path": "tests/test_schema.py",
       "role": "project_file",
       "sha256": "d4885a92612e8c6caeeb97eacec97d9ea8ce75eeafd6fb51a64e95a1b6aa6fba"
+    },
+    {
+      "bytes": 3888,
+      "media_type": "text/markdown",
+      "path": "THIRD_PARTY_NOTICES.md",
+      "role": "project_file",
+      "sha256": "8cf82cdf966300d2a8539a32dab579ee358244a938215d38de76bc59644460c8"
     }
   ],
   "generated_at": "2026-08-19T00:00:00+00:00",

@@ -1,177 +1,45 @@
-# Initial Roadmap
+# Research roadmap
 
-## Guiding Principle
+Status: proposed experiments and future directions, not delivery commitments.
 
-Prove the architecture with the smallest end-to-end vertical slice before expanding the regulatory corpus, control library or UI.
+## Current baseline
 
-## Phase 0 - Governance and Clean Room
+The repository contains one project-approved experimental scenario, a scenario schema, a compact ATT&CK snapshot, integrity tooling, and early code and tests. The existing CIA scoring has [documented limitations](validation-status.md). A complete assessment workflow and demonstrated practical benefit remain to be established.
 
-**Goal:** establish project boundaries and traceability.
+## Next milestone: a small, reviewable assessment example
 
-Deliverables:
+Proposed scope:
 
-- clean-room/IP boundary;
-- project vision;
-- decision log;
-- public-source provenance rules;
-- new project naming later.
+- one synthetic system with explicit service, asset, account, and data context;
+- two or three scenarios with applicability rationale;
+- five to ten independently authored controls with mapping rationale and evidence expectations;
+- proposed impact criteria with evidence requirements and explicit handling of unknown information;
+- cases on both sides of rating boundaries, including an insufficient-evidence case;
+- a reproducible human-readable output and a small OSCAL Catalog/Profile experiment.
 
-Indicative effort: **~1 week full-time equivalent**.
+The numbers bound the experiment; they are not coverage or quality targets. No new scoring scale or thresholds are approved by this roadmap. Attack Flow or D3FEND integration should be added only if needed to test the selected cases.
 
-## Phase 1 - Canonical Domain Model
+## Success criteria
 
-**Goal:** define project-native objects before coding external integrations.
+- A reviewer can trace each applicability, impact, and control-mapping judgment to its criteria, evidence, assumptions, and source versions.
+- Boundary cases make the distinction between adjacent impact categories explicit; missing evidence is not treated as low impact.
+- A second practitioner can attempt the example without oral guidance. Record disagreements and revisions rather than assuming reviewer agreement.
+- Compare the approach with a simple manual assessment of the same cases using review time, omissions, and clarity of decisions. Record the evaluation procedure and limitations; do not claim improvement unless supported by the results.
+- Generated artifacts are structurally valid and reproducible. Passing these checks demonstrates the technical path, not methodological correctness.
 
-Deliverables:
+## Expansion gate
 
-- `RiskScenario` model;
-- review status/version model;
-- provenance model;
-- system-context/profiling minimum model;
-- JSON Schema / Pydantic representation.
+Review the example and its evaluation before expanding the library or regulatory scope. If it does not show useful, explainable results, revise the method or reduce scope. Revised approved scenarios require new versions and review decisions.
 
-Indicative effort: **1-2 weeks**.
+## Future directions
 
-## Phase 2 - ATT&CK Ingestion
+Subject to evidence from the first milestone:
 
-Deliverables:
+- broader ATT&CK ingestion and semantic change analysis;
+- Attack Flow and D3FEND adapters;
+- additional scenario families and control mappings;
+- one bounded regulatory slice, with source-level traceability and human review;
+- assessment evidence, findings, treatment, and later residual-risk experiments;
+- additional OSCAL models, integrations, or UI where a demonstrated use case warrants them.
 
-- versioned ATT&CK source sync;
-- STIX normalization;
-- local query interface;
-- provenance/version recording;
-- basic CLI.
-
-Indicative effort: **1-2 weeks**.
-
-## Phase 3 - Attack Flow and D3FEND Integration
-
-Deliverables:
-
-- Attack Flow parser/integration;
-- selected corpus test cases;
-- D3FEND sync/query adapter;
-- relationships retained as candidate knowledge.
-
-Indicative effort: **1-2 weeks**.
-
-## Phase 4 - Risk Scenario Compiler v0.1
-
-Deliverables:
-
-- technique/family clustering;
-- context-aware candidate generation;
-- candidate YAML;
-- human-readable Markdown rendering;
-- approve/modify/reject workflow;
-- immutable approved versions;
-- upstream-change review trigger.
-
-Indicative effort: **3-4 weeks**.
-
-## Phase 5 - Independent Control Library Seed
-
-Goal is not completeness. Build enough original controls to prove scenario-to-control relationships.
-
-Initial target: approximately **50-80 independently authored controls** across a small set of domains.
-
-Deliverables:
-
-- control/objective schema;
-- evidence expectation fields;
-- scenario relationships;
-- D3FEND/public-source provenance;
-- second human approval gate.
-
-Indicative effort: **3-5 weeks**.
-
-## Phase 6 - OSCAL PoC
-
-Deliverables:
-
-- control library -> OSCAL Catalog;
-- approved scenario controls -> OSCAL Profile;
-- project metadata using OSCAL extension mechanisms;
-- schema validation;
-- deterministic compiler tests.
-
-Indicative effort: **2-3 weeks**.
-
-## Phase 7 - DORA Regulatory Slice
-
-Start with a bounded subset rather than the entire regulatory corpus.
-
-Deliverables:
-
-- regulatory requirement schema;
-- authoritative source provenance;
-- normalized requirements;
-- human review workflow;
-- selected control mappings;
-- OSCAL representation/mapping.
-
-Indicative effort: **2-3 weeks for a first useful slice**.
-
-## Phase 8 - NIS2 and ADAE
-
-Extend the same model after DORA proves stable.
-
-Indicative effort:
-
-- NIS2: **2-3 weeks initial slice**;
-- ADAE: **2-3 weeks initial slice**, likely with more manual curation.
-
-## Phase 9 - Assessment and Evidence Prototype
-
-Deliverables:
-
-- system profile;
-- scenario activation;
-- resolved OSCAL Profile;
-- assessment scope;
-- evidence/observation model;
-- finding and residual-risk prototype;
-- treatment / POA&M experiment.
-
-Indicative effort: **3-4 weeks**.
-
-## Phase 10 - Calibration and Synthetic Cases
-
-Deliverables:
-
-- 10-20 synthetic assessment cases;
-- false-positive/false-negative analysis for scenario relevance;
-- scenario duplication analysis;
-- control-mapping review;
-- regulatory mapping review;
-- versioned methodology calibration notes.
-
-Indicative effort: **3-4 weeks**.
-
-## Overall Indicative Timeline
-
-Assuming focused full-time-equivalent effort and some parallelization:
-
-- **Architecture PoC:** ~6-8 weeks
-- **Useful MVP:** ~3-4 months
-- **Serious public beta:** ~6 months
-- **Community/research-quality framework:** ~9-12 months
-
-As a side project at roughly 10-15 hours/week, a realistic MVP horizon is closer to **6-9 months**.
-
-These are planning estimates, not delivery commitments. They should be recalibrated after the first vertical slice.
-
-## Initial Definition of Done
-
-The architecture is proven when one synthetic system/context can execute the following chain:
-
-```text
-MITRE source data
-      -> candidate scenario
-      -> human-approved scenario
-      -> approved controls
-      -> OSCAL Catalog/Profile
-      -> valid OSCAL artifact
-```
-
-Only after this works should scope expand materially.
+DORA, NIS2, and Greek ADAE sources remain candidate research directions. Their mention does not imply implemented regulatory coverage or compliance assurance. Delivery dates will be reconsidered after measuring implementation and review effort on the first milestone.
