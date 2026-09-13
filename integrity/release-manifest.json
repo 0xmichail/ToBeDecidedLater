@@ -29,25 +29,25 @@
       "sha256": "4adcc9ec267805aa921469d3771a896689f689323e4879932e0f4b3b67ec5c34"
     },
     {
-      "bytes": 3854,
+      "bytes": 5478,
       "media_type": "text/markdown",
       "path": "docs/01-project-vision.md",
       "role": "project_file",
-      "sha256": "e3aeed52ac1fd472e4ab7bbd841e855e8bf84fe5030521028e671df0e1e42864"
+      "sha256": "06d5285a4be0ab18f70bb07a3c9325b376d25ff1a9a33de0f60ab64a34053a2e"
     },
     {
-      "bytes": 6719,
+      "bytes": 6762,
       "media_type": "text/markdown",
       "path": "docs/02-target-architecture.md",
       "role": "project_file",
-      "sha256": "18c05c8eb494bc9c8df39f7d042b81bc343be5597b5fe985ccf8b71fa0203141"
+      "sha256": "dc73bd4676e253aacc14ce6b9b6b858549849b3a91ca954e95c4561d75e96dd0"
     },
     {
-      "bytes": 5814,
+      "bytes": 5446,
       "media_type": "text/markdown",
       "path": "docs/03-risk-scenario-compiler.md",
       "role": "project_file",
-      "sha256": "722718ab546891f9be76b1cf09e43aa9d9c476bf9bb970a58e19dd9aefe6e96d"
+      "sha256": "1895bdb3ef3cc0db63fb8d2f3a00391b9e0ff046ddf37e175976e6ae2c59e879"
     },
     {
       "bytes": 3818,
@@ -64,11 +64,11 @@
       "sha256": "5a93448668292d7c02dc91d589ad513097c9f437109afdfec0c2d4e1bccadc32"
     },
     {
-      "bytes": 3730,
+      "bytes": 3965,
       "media_type": "text/markdown",
       "path": "docs/06-technical-environment.md",
       "role": "project_file",
-      "sha256": "b35267a8d869c243380514ca94362c91ca6d6279f404af9733a367296b4e703d"
+      "sha256": "a1674b9464567a307f8ad8b1dfa8f5d8d6de211bbbb32147cc585e2b5e68e072"
     },
     {
       "bytes": 3086,
@@ -78,11 +78,11 @@
       "sha256": "08099e87a635c5ed71f6a7d03fb27718339766d1a053fc2f0e1670990b5be7e6"
     },
     {
-      "bytes": 5391,
+      "bytes": 6806,
       "media_type": "text/markdown",
       "path": "docs/08-design-decisions.md",
       "role": "project_file",
-      "sha256": "fc13453d8e56462082297e554b21d6fc3b4044bdc4955031baec002da1fbc760"
+      "sha256": "d466759b5d6d8655ca0f5d8d510ebfb171a4377e3e8f193da98b64c861b5a6a4"
     },
     {
       "bytes": 12497,
@@ -127,11 +127,11 @@
       "sha256": "b1295094f3670de39440e5db5b0902a51fcb15c68f9714db7a7c6efc42358499"
     },
     {
-      "bytes": 7123,
+      "bytes": 9361,
       "media_type": "text/markdown",
       "path": "README.md",
       "role": "project_file",
-      "sha256": "419e9314167b3f056ef6583ed360b2bfb5ec096d9201620fc02d9250f63be571"
+      "sha256": "635331c78cb34d470500a726e7c91d2242065bc25029679b49ee17b39eeee10d"
     },
     {
       "bytes": 1513,
