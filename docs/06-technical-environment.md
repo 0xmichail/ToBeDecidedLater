@@ -1,195 +1,125 @@
 # Technical Environment
 
-## Initial Goal
+## Current Goal
 
-The first proof of concept should be intentionally small and should not require paid infrastructure or a complex platform stack.
+Keep the research prototype intentionally small, reproducible, and inexpensive to work on. The current implementation does not require cloud infrastructure, containers, a database, or paid services.
 
-## Recommended Local Environment
+## Primary Local Environment
 
-For Windows development:
+The project is currently developed primarily on native Windows using PowerShell and Python.
+
+Current baseline:
 
 ```text
-Windows 11
+Windows
    |
-   +-- WSL2
-        +-- Ubuntu
-             |
-             +-- Git
-             +-- Python 3.11+
-             +-- uv
-             +-- Docker
-             +-- VS Code
+   +-- PowerShell
+   +-- Git
+   +-- Python 3.13
+   +-- project-local .venv
+   +-- editable install from pyproject.toml
 ```
 
-## Recommended Tools
+The repository should not require WSL, Docker, or a separate orchestration layer for the present prototype.
 
-- Visual Studio Code
-- WSL2 + Ubuntu
-- Git
-- GitHub
-- Python 3.11+
-- `uv` for Python dependency/environment management
-- Docker Desktop with WSL2 backend
+## Useful Tools
 
-Suggested VS Code extensions:
+Typical development tools may include:
 
-- WSL
-- Python
-- Pylance
-- Docker
-- YAML
-- GitHub Pull Requests
+- Visual Studio Code or another editor;
+- Git and GitHub;
+- Python 3.13 for the current primary development environment;
+- a repository-local virtual environment;
+- `pytest` for tests.
 
-## Initial Python Stack
+WSL2, `uv`, Docker, or other tooling may be useful in some environments, but they are optional and should be introduced only when they solve a demonstrated requirement.
 
-Candidate libraries:
+## Current Python Stack
 
-| Library | Purpose |
-| --- | --- |
-| `mitreattack-python` | ATT&CK processing |
-| `stix2` | STIX objects |
-| `taxii2-client` | TAXII access |
-| `pydantic` | canonical project models |
-| `PyYAML` | YAML methodology files |
-| `jsonschema` | schema validation |
-| `httpx` | external API clients |
-| `rdflib` | D3FEND RDF/JSON-LD work |
-| `typer` | command-line interface |
-| `rich` | readable CLI output/review UX |
-| `pytest` | tests |
+The implemented project dependencies are defined by `pyproject.toml` and should be treated as the source of truth.
 
-Exact dependencies must be validated before implementation.
+The current prototype is intentionally narrow. Additional libraries such as STIX/TAXII clients, OSCAL tooling, RDF libraries, richer CLI frameworks, or HTTP clients may be evaluated later if an experiment requires them.
 
-## What Not to Add Initially
+A candidate dependency is not a current capability simply because it appears in a design note.
 
-Do not introduce the following until a real requirement exists:
+## What Not to Add Without a Demonstrated Need
+
+Avoid introducing infrastructure only because it may be useful in a future architecture:
 
 - Kubernetes;
 - cloud deployment;
 - Redis;
 - Elasticsearch;
 - Neo4j;
-- large web framework;
-- complex event bus;
-- multiple databases.
+- a large web framework;
+- a complex event bus;
+- multiple databases;
+- mandatory containers.
 
-Start with files + Git + schemas.
+Start with files, Git, schemas, tests, and explicit transformations.
 
-## Proposed Repository Structure
+## Repository Structure
 
-```text
-ToBeDecidedLater/
-|
-├── README.md
-├── pyproject.toml
-├── docs/
-├── schemas/
-│   └── risk-scenario.schema.json
-|
-├── sources/
-│   ├── mitre-attack/
-│   ├── mitre-d3fend/
-│   └── attack-flow/
-|
-├── scenarios/
-│   ├── candidates/
-│   ├── approved/
-│   └── rejected/
-|
-├── controls/
-│   ├── candidates/
-│   └── approved/
-|
-├── regulations/
-│   ├── dora/
-│   ├── nis2/
-│   └── adae/
-|
-├── oscal/
-│   ├── catalogs/
-│   ├── profiles/
-│   └── mappings/
-|
-├── src/
-│   ├── ingest/
-│   ├── scenario/
-│   ├── review/
-│   └── oscal/
-|
-└── tests/
-```
+The actual repository tree is the source of truth for what exists today.
 
-Directories should be created only as implementation begins; this is the target structure, not a requirement to create empty folders immediately.
+Possible future areas may include controls, regulatory representations, OSCAL outputs, additional source snapshots, or assessment artifacts, but empty directories should not be created merely to make the repository resemble a target architecture.
 
-## Source API / Data Cost Assumption
+## External Source Model
 
-The initial design assumes use of public/open data interfaces for MITRE ATT&CK, Attack Flow, D3FEND and OSCAL tooling, with local snapshots to avoid runtime reliance on external services.
+The current approach favors versioned local snapshots and recorded provenance where external public data is used.
 
-Commercial LLM APIs are optional and should not be required for the deterministic core.
-
-## Source Snapshot Model
+Conceptually:
 
 ```text
-External source
+External authoritative source
      |
      v
-risk-engine sync
+controlled retrieval
      |
      v
-versioned raw snapshot
+versioned local snapshot
      |
      v
-normalize
+validation / normalization
      |
      v
-validate
-     |
-     v
-local knowledge objects
+project objects
 ```
 
-## Candidate CLI
+The present public repository demonstrates only a limited ATT&CK snapshot workflow. Equivalent pipelines for D3FEND, Attack Flow, regulation sources, or OSCAL are future research possibilities rather than current capabilities.
+
+## Optional AI Use
+
+Commercial or hosted LLM APIs are not required for the deterministic project core.
+
+AI may be used as a development and research assistant, but the public artifacts should remain understandable, reviewable, and testable without requiring an AI service to approve or interpret them.
+
+## Candidate CLI Direction
+
+Commands discussed in design notes, such as scenario generation, control mapping, or OSCAL compilation, should be treated as placeholders until they are actually implemented and tested.
+
+Implemented command behavior should be documented from the code and tests, not inferred from a future command list.
+
+## Near-Term Engineering Principle
+
+The next useful engineering step should prove a small research question end to end rather than expand the technology stack.
+
+For example:
 
 ```text
-risk-engine sync attack
-risk-engine sync d3fend
-risk-engine techniques
-risk-engine scenario generate <technique-or-family>
-risk-engine scenario review
-risk-engine control map <scenario>
-risk-engine oscal compile <scenario>
-risk-engine oscal validate <scenario>
+versioned threat input
+    |
+    v
+structured scenario object
+    |
+    v
+human review context
+    |
+    v
+explicit control/evidence reasoning
+    |
+    v
+reproducible validation
 ```
 
-Names are placeholders.
-
-## First Vertical Slice
-
-The first implementation should prove only this:
-
-```text
-ATT&CK sync
-    |
-    v
-T1078 / selected techniques
-    |
-    v
-candidate scenario YAML
-    |
-    v
-human approval
-    |
-    v
-approved scenario YAML
-    |
-    v
-small dummy/independent control set
-    |
-    v
-OSCAL Profile
-    |
-    v
-OSCAL validation
-```
-
-No UI, regulation ingestion or large control library is required to prove the architecture.
+OSCAL export, broader regulatory ingestion, UI work, and larger knowledge stores should remain optional until smaller experiments demonstrate that they add value.
