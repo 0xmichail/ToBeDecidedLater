@@ -1,17 +1,21 @@
-# Risk Scenario Compiler
+# Risk Scenario Compiler — Research Design
+
+Status: exploratory design. The public repository contains structured scenario models and one experimental scenario, but it does not currently implement a generalized scenario-generation engine.
 
 Approval terminology and current scoring limitations are defined in [Validation status](validation-status.md). Approval is internal to the project and does not constitute independent validation or certification.
 
-## Objective
+## Research Objective
 
-Build a semi-automated engine that turns structured MITRE threat knowledge plus system context into candidate cyber risk scenarios.
+Investigate whether structured threat knowledge plus explicit system context can support the creation of candidate cyber risk scenarios that are easier to review, challenge, version, and reproduce.
 
-The engine does **not** certify methodology. It proposes structured candidates for human review.
+The term **compiler** is used here as a design metaphor for a deterministic transformation pipeline. It should not be read as a claim that a complete compiler currently exists.
 
-## Core Workflow
+Any generated output would remain a candidate for human review. The project does not treat generation as certification, validation, or risk approval.
+
+## Conceptual Workflow
 
 ```text
-MITRE ATT&CK / Attack Flow
+MITRE ATT&CK / optional Attack Flow
         |
         v
 Candidate threat behaviour
@@ -20,221 +24,109 @@ Candidate threat behaviour
         + exposure
         + target type
         + data / criticality
+        + explicit assumptions
         |
         v
-Scenario Compiler
+Scenario reasoning / transformation
         |
         v
-Candidate Scenario YAML
+Candidate structured scenario
         |
         v
-Human Review
+Human review
   approve / modify / reject
         |
         v
-Approved Scenario v1.0
+Project-approved experimental scenario
         |
         v
-D3FEND + Control Mapping
-        |
-        v
-Second Human Approval
-        |
-        v
-OSCAL compilation
+Possible later research:
+controls / evidence / OSCAL representation
 ```
 
-## Why an Abstraction Layer is Needed
+Only parts of this chain are implemented in the current public prototype.
 
-MITRE ATT&CK techniques are adversary behaviours, not business-oriented risk scenarios.
+## Why an Abstraction Layer May Be Useful
 
-The project should not create one scenario per ATT&CK technique. Multiple techniques may contribute to one meaningful risk scenario.
+MITRE ATT&CK techniques describe adversary behaviours. They are not, by themselves, business or operational risk scenarios.
 
-Example abstraction:
+A useful risk scenario usually needs additional context about the target, relevant preconditions, exposure, consequences, uncertainty, and the scope of the assessment.
+
+The research hypothesis is that multiple ATT&CK behaviours may sometimes be combined into a more meaningful scenario abstraction. For example:
 
 ```text
 Brute Force
     +
 Valid Accounts
-    +
-Account Manipulation
         |
         v
-Credential / Account Compromise scenario family
+Possible credential-compromise scenario family
 ```
 
-## Proposed Scenario Model
+Whether such grouping is useful, repeatable, and sufficiently context-sensitive still needs to be tested.
+
+## Canonical Scenario Representation
+
+The executable schema in [`../schemas/risk-scenario.schema.json`](../schemas/risk-scenario.schema.json) and the corresponding source model are the canonical description of the currently implemented scenario structure.
+
+The published example is available at:
+
+- [`../scenarios/approved/RS-IAM-001/scenario.yaml`](../scenarios/approved/RS-IAM-001/scenario.yaml)
+- [`../scenarios/approved/RS-IAM-001/scenario.md`](../scenarios/approved/RS-IAM-001/scenario.md)
+
+This document intentionally does not duplicate a simplified YAML structure, because illustrative examples can drift from the executable schema and create ambiguity about what the prototype actually supports.
+
+## Human Review
+
+A reviewer may need to assess, among other things:
+
+- whether the scenario has meaningful cyber-risk semantics;
+- whether the threat-source relationship is reasonable;
+- whether the target and assessment scope are clear;
+- whether preconditions and exposure assumptions are defensible;
+- whether consequences are overstated or under-specified;
+- what information is missing or uncertain;
+- whether apparently similar scenarios should remain separate or be combined.
+
+Project approval means only that the object has been accepted into the experimental project library under the recorded review context.
+
+Upstream source changes should not silently rewrite an approved historical scenario. A later process may instead flag dependencies for review and produce a new project version when necessary.
+
+## Defensive-Knowledge Research
+
+After a scenario is reviewed, D3FEND or other public sources may be explored as inputs for candidate defensive outcomes.
+
+Such relationships do not establish that a specific project control is appropriate, implemented, effective, or sufficient.
+
+A possible future reasoning chain is:
 
 ```text
-RiskScenario
-├── id
-├── version
-├── title
-├── status
-├── family
-│
-├── threat
-│   ├── actor_type
-│   └── intent / capability context
-│
-├── target
-│   ├── asset_types
-│   ├── service_types
-│   └── technology context
-│
-├── preconditions
-├── exposure_conditions
-│
-├── attack_behaviour
-│   ├── ATT&CK techniques
-│   ├── tactics
-│   └── optional Attack Flow reference
-│
-├── adverse_event
-├── consequences
-│   ├── confidentiality
-│   ├── integrity
-│   ├── availability
-│   ├── operational
-│   ├── customer
-│   └── regulatory
-│
-├── defensive_requirements
-├── control_references
-├── regulatory_references
-│
-├── provenance
-│   ├── ATT&CK version
-│   ├── source object IDs
-│   ├── source hashes / retrieval date
-│   └── generator version
-│
-└── review
-    ├── status
-    ├── reviewer
-    ├── decision_date
-    └── rationale
-```
-
-## Candidate Scenario Example
-
-```yaml
-scenario_id: RS-IAM-001
-version: 0.1
-status: candidate
-family: credential_compromise
-
-title: Compromise of privileged credentials
-
-target:
-  asset_types:
-    - application
-    - identity_service
-
-preconditions:
-  - privileged_accounts_exist
-  - administrative_access_is_available
-
-attack_behaviour:
-  mitre_attack:
-    - id: T1078
-      name: Valid Accounts
-    - id: T1110
-      name: Brute Force
-
-adverse_event: >
-  A threat actor obtains or abuses legitimate credentials to gain
-  unauthorized access to the assessed service.
-
-potential_consequences:
-  confidentiality: true
-  integrity: true
-  availability: true
-
-scenario_statement: >
-  A threat actor compromises legitimate credentials and uses them to
-  obtain unauthorized access to the assessed service, potentially
-  enabling unauthorized disclosure, modification or disruption of
-  information and services.
-
-provenance:
-  generator: scenario-compiler
-  generator_version: 0.1
-
-review:
-  status: pending
-  reviewer: null
-  decision_date: null
-  rationale: null
-```
-
-## Human Approval Gate #1
-
-The reviewer assesses whether:
-
-- the scenario has meaningful cyber-risk semantics;
-- the ATT&CK relationship is reasonable;
-- the target/scope is correct;
-- preconditions are defensible;
-- consequences are not overstated;
-- duplicate scenarios should be merged;
-- the scenario should enter the project-approved experimental library.
-
-Approved scenarios receive a stable ID and version.
-
-Upstream ATT&CK changes must never silently rewrite an approved scenario. They should instead set a `review_required` state.
-
-## D3FEND Enrichment
-
-After scenario approval, D3FEND may be queried to identify candidate defensive techniques associated with the relevant ATT&CK behaviour.
-
-D3FEND relationships are inputs, not automatic controls.
-
-Flow:
-
-```text
-Approved Scenario
+Reviewed Scenario
       |
-ATT&CK Techniques
+Relevant adversary behaviour
       |
       v
-D3FEND candidate defensive techniques
+Candidate defensive knowledge
       |
       v
-Project Control Objectives
+Project control objective
       |
       v
-Project Controls
+Project control
+      |
+      v
+Human-reviewed mapping
 ```
 
-## Human Approval Gate #2
+## OSCAL Research
 
-Control mappings require a second explicit review:
+A scenario remains a project-native object because OSCAL does not provide a standalone project-specific risk-scenario model.
 
-> Do these controls materially address this approved risk scenario?
+A future experiment may represent reviewed controls or mappings in OSCAL where the semantics align. Structural OSCAL validity would demonstrate format conformance only; it would not establish that the underlying scenario, mapping, or risk judgment is methodologically valid.
 
-Only approved relationships should be used to generate a project-approved OSCAL Profile.
+## Candidate Scenario Areas for Future Exploration
 
-## OSCAL Output Per Scenario
-
-A scenario remains a project-native object because OSCAL does not define a standalone Risk Scenario model.
-
-Suggested package:
-
-```text
-scenarios/RS-IAM-001/
-├── scenario.yaml
-├── scenario.md
-├── provenance.json
-├── attack-flow.json        # optional
-└── oscal/
-    ├── profile.json
-    └── mapping.json
-```
-
-The OSCAL Profile represents the approved control set relevant to assessment of the scenario.
-
-## Initial Scenario Families to Explore
+Possible areas include:
 
 - credential compromise;
 - privileged account compromise;
@@ -252,4 +144,4 @@ The OSCAL Profile represents the approved control set relevant to assessment of 
 - administrative-interface compromise;
 - recovery inhibition.
 
-These are research candidates, not yet approved methodology families.
+These are research candidates only. They are not an approved taxonomy, complete risk library, or commitment to implement each area.
