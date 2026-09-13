@@ -1,6 +1,10 @@
-# Target Architecture
+# Exploratory Target Architecture
 
-## High-Level Architecture
+Status: proposed research architecture, not a description of a fully implemented system.
+
+This document records a possible architecture for testing the project ideas. Components marked as future or proposed should not be read as currently available capabilities.
+
+## Conceptual Architecture
 
 ```text
 ┌───────────────────────────────────────────┐
@@ -12,72 +16,60 @@
                      │
                      v
 ┌───────────────────────────────────────────┐
-│          VERSIONED KNOWLEDGE STORE        │
+│       VERSIONED KNOWLEDGE SNAPSHOTS       │
 │                                           │
 │ Threat techniques                         │
-│ Attack flows                              │
-│ Defensive techniques                      │
-│ Regulatory requirements                   │
+│ Defensive knowledge                       │
+│ Regulatory sources                        │
 │ Provenance / source versions              │
 └────────────────────┬──────────────────────┘
                      │
                      v
 ┌───────────────────────────────────────────┐
-│          RISK SCENARIO COMPILER           │
+│      SCENARIO REASONING / COMPILATION     │
 │                                           │
 │ System context                            │
 │ Exposure                                  │
 │ Asset/service type                        │
-│ Data                                      │
-│ Criticality                               │
+│ Data / criticality                        │
 │ Threat relevance                          │
 │ Attack behaviour                          │
-│ Consequence abstraction                   │
+│ Consequence reasoning                     │
 └────────────────────┬──────────────────────┘
                      │
                      v
               Candidate Scenario
                      │
                      v
-               HUMAN GATE #1
+               HUMAN REVIEW
            approve / modify / reject
                      │
                      v
-              Approved Scenario
+      Project-approved experimental object
                      │
           ┌──────────┼───────────┐
           v          v           v
-       D3FEND     Controls   Regulations
+     Defensive    Controls   Regulations
+      knowledge   research    research
           │          │           │
           └──────────┼───────────┘
                      v
-               HUMAN GATE #2
-          approve control mappings
+          Further human review
                      │
                      v
-┌───────────────────────────────────────────┐
-│              OSCAL COMPILER               │
-│                                           │
-│ Catalog                                   │
-│ Profile                                   │
-│ Control Mapping                           │
-│ Component Definition / SSP later          │
-│ Assessment Plan / Results later           │
-│ POA&M later                               │
-└────────────────────┬──────────────────────┘
+        Optional OSCAL representation
                      │
                      v
-               OSCAL Validation
-                     │
-                     v
-             Published Methodology
+        Structural validation / export
 ```
+
+The current public implementation covers only a subset of this flow.
 
 ## Architectural Separation
 
 ### Domain Layer
 
-Project-native concepts:
+Possible project-native concepts include:
 
 - RiskScenario
 - SystemProfile
@@ -88,26 +80,32 @@ Project-native concepts:
 - RegulatoryRequirement
 - MappingDecision
 - ReviewDecision
+- EvidenceExpectation
+- AssessmentObservation
 
-This layer remains independent of OSCAL.
+Not all of these concepts are implemented today. They represent the domain vocabulary being explored.
 
 ### Integration Layer
 
-Adapters for:
+Potential adapters may include:
 
 - MITRE ATT&CK STIX/TAXII;
 - Attack Flow;
-- D3FEND API/ontology;
+- D3FEND data/ontology;
 - EUR-Lex/ELI and other regulatory sources;
 - OSCAL models and validators.
 
+Only implemented integrations should be described elsewhere as current capabilities.
+
 ### OSCAL Layer
 
-Compiled artefacts generated from approved project objects.
+OSCAL is being considered as a downstream representation/interoperability layer for approved project objects where the semantics align.
+
+Generating structurally valid OSCAL would demonstrate representation compatibility, not methodological validity or regulatory compliance.
 
 ## Source Synchronization Principle
 
-Runtime assessment must not depend directly on the availability of external APIs.
+A useful design goal is that assessment logic should not depend directly on the live availability of an external source.
 
 Preferred pattern:
 
@@ -115,7 +113,7 @@ Preferred pattern:
 Authoritative source
       |
       v
-controlled sync
+controlled retrieval
       |
       v
 versioned local snapshot
@@ -124,62 +122,59 @@ versioned local snapshot
 normalization / validation
       |
       v
-project knowledge store
+project objects
 ```
 
-This supports reproducibility, deterministic assessment and provenance.
+This can support reproducibility and provenance. The current prototype already demonstrates a limited versioned ATT&CK snapshot; broader synchronization remains future work.
 
-### ATT&CK Change Detection and Integration Loop
+## Proposed ATT&CK Change-Review Loop
 
-The synchronization boundary also acts as an early-warning mechanism for
-upstream ATT&CK changes. It checks the official collection index/release tags
-weekly when automation is available, on demand during research, and before each
-scenario approval or project release.
+A richer change-detection mechanism is a possible future experiment, not an implemented current capability.
 
-The comparison is semantic, not merely a file-hash comparison. It tracks STIX
-IDs and external IDs across versions and evaluates changes to:
+Potential questions include whether the project should compare ATT&CK versions semantically rather than only by file hash, and whether it can identify when an upstream change may affect an existing scenario.
+
+Possible change dimensions include:
 
 - techniques and sub-techniques;
 - `modified`, `revoked`, and `x_mitre_deprecated` state;
-- platforms and kill-chain phases/tactics;
-- parent/sub-technique and other STIX relationships;
-- campaigns, groups, software, procedure examples, and Attack Flow evidence.
+- platforms and tactics;
+- parent/sub-technique relationships;
+- relevant procedure examples or other referenced objects.
 
-A source change enters the project through one of three paths:
+A future implementation might classify a source change as:
 
-1. record-only, when no project-relevant semantics changed;
-2. `review_required`, when an existing scenario dependency changed;
-3. a new candidate, when the delta suggests a genuinely new attack vector or
-   a novel combination of known techniques.
+1. informational only;
+2. review required for an existing project object;
+3. a prompt for a new research candidate.
 
-The project maintains an impact index from ATT&CK/STIX object IDs to scenario
-IDs so each delta report can identify affected methodology artifacts. Approved
-objects are never overwritten. Accepted changes produce new project versions
-with new manifests, hashes, and review decisions.
+A project-wide semantic impact index, automated schedule, and approval-triggered change workflow do **not** currently exist in the public prototype.
 
 ## Initial Storage Strategy
 
-Do not introduce a complex database prematurely.
+Avoid introducing a complex database until there is evidence that the relationships and query patterns require one.
 
-Initial source of truth:
+The current research favors simple artifacts first:
 
-- YAML for project-authored methodology objects;
-- JSON for source snapshots and OSCAL outputs;
+- YAML for project-authored structured objects;
+- JSON for source snapshots and possible interoperability outputs;
 - Markdown for human-readable rendering;
-- Git for review/history/versioning.
+- Git for version history and review context.
 
-A graph or relational database can be introduced after the relationships and query patterns are stable.
+A graph or relational database should be considered only if later experiments justify it.
 
-## Security-by-Design Principles
+## Security and Integrity Principles
 
-- no secrets in repository;
-- pin and record source versions;
-- validate all imported structured data;
+Current or intended principles include:
+
+- no secrets in the repository;
+- record source versions and provenance;
+- validate imported structured data;
 - schema-validate project domain objects;
 - treat external content as untrusted input;
 - retain source hashes where useful;
-- immutable approved versions;
-- explicit human approval gates;
-- no silent updates of approved scenarios after an upstream framework change;
-- deterministic OSCAL compilation from approved data;
-- tests for mappings and serialization.
+- preserve approved historical artifacts rather than silently rewriting them;
+- keep human approval explicit;
+- distinguish structural validation from methodological validation;
+- add deterministic transformation and mapping tests when those transformations exist.
+
+These are engineering constraints and research safeguards, not claims of production-grade security assurance.
